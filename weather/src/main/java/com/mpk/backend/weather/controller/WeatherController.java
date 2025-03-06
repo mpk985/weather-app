@@ -1,6 +1,6 @@
 package com.mpk.backend.weather.controller;
 
-import com.mpk.backend.weather.model.Address;
+import com.mpk.backend.weather.model.WeatherApiRequest;
 import com.mpk.backend.weather.model.WeatherApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +12,12 @@ public class WeatherController {
 
     /**
      * GET Endpoint for a location's current weather
-     * @param address
+     * @param weatherApiRequest
      * @return WeatherApiResponse
      */
     @GetMapping
     public ResponseEntity<WeatherApiResponse> getCurrentWeather(
-            @RequestBody Address address
+            @RequestBody WeatherApiRequest weatherApiRequest
     ) {
 
         return ResponseEntity.ok().body(new WeatherApiResponse());
