@@ -7,7 +7,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface ExternalWeatherClient {
 
-    ResponseEntity<ClientCurrentWeatherResponse> getCurrentWeather(String location);
-
     ResponseEntity<ClientForecastWeatherResponse> getForecastWeather(String location, int days);
 }

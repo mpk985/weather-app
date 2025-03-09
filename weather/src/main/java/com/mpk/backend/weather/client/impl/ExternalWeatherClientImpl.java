@@ -10,12 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
-import java.util.Objects;
 
 @Component
 public class ExternalWeatherClientImpl implements ExternalWeatherClient {
@@ -42,29 +38,12 @@ public class ExternalWeatherClientImpl implements ExternalWeatherClient {
         this.apiKey = apiKey;
     }
 
-    public ResponseEntity<ClientCurrentWeatherResponse> getCurrentWeather(String location) {
-        if(Strings.isBlank(location)){
-            logger.error("Invalid input. Location can not be blank");
-            return null;
-        }
-        logger.info("Calling external weather client for current weather: {}", location);
-        String currentWeatherUri = UriComponentsBuilder.fromUriString(clientUrl+currentWeatherPath)
-                .queryParam("key", apiKey)
-                .queryParam("location", location)
-                .build().toUriString();
-        //add query params for API key and Location
-        return restTemplate.getForEntity(currentWeatherUri, ClientCurrentWeatherResponse.class);
-    }
 
     public ResponseEntity<ClientForecastWeatherResponse> getForecastWeather(String location, int days) {
-        if(Strings.isBlank(location) || days < 1){
-            logger.error("Invalid input. Location can not be blank & days must be > 0");
-            return null;
-        }
-        logger.info("Calling external weather client for {}-day(s) forecasted weather: {}", days, location);
+        logger.info("Calling external weather client for {}-day(s) forecasted weather in location: {}", days, location);
         String forecastUrl = UriComponentsBuilder.fromUriString(clientUrl+forecastWeatherPath)
                 .queryParam("key", apiKey)
-                .queryParam("location", location)
+                .queryParam("q", location)
                 .queryParam("days", days)
                 .build().toUriString();
 
