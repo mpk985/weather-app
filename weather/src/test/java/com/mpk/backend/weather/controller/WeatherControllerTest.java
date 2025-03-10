@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +29,7 @@ public class WeatherControllerTest {
 
     @Test
     public void shouldReturn200WithLocationAndDays() {
-        WeatherApiRequest request = new WeatherApiRequest("96150", 1);
+        WeatherApiRequest request = new WeatherApiRequest("96150");
         ClientForecastWeatherResponse response = new ClientForecastWeatherResponse();
         when(service.getWeather(request)).thenReturn(ResponseEntity.status(200).body(response));
         ResponseEntity<ClientForecastWeatherResponse> testResponse = controller.getWeather(request);
