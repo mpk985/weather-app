@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ *
+ * Rest Controller for Querying a Location's Current or Future Weather Forecat
+ * Author: Michael Kelly
+ * March 8, 2025
+ *
+ */
 @RestController
 @RequestMapping("/v1/weather")
 public class WeatherController {
@@ -27,7 +34,6 @@ public class WeatherController {
     public ResponseEntity<ClientForecastWeatherResponse> getWeather(
             @RequestBody WeatherApiRequest weatherApiRequest
     ) {
-
         return weatherService.getWeather(weatherApiRequest);
     }
 

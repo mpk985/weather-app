@@ -17,8 +17,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Objects;
 
+/**
+ * External Client for querying WeatherApi.com's free weather API
+ */
 @Component
 public class ExternalWeatherClientImpl implements ExternalWeatherClient {
 
@@ -48,7 +50,9 @@ public class ExternalWeatherClientImpl implements ExternalWeatherClient {
         }
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date todaysDate = new Date();
+        /*  If no date supplied, query using today's date */
         Date date = inputDate != null ? inputDate : new Date();
+
         logger.info("Calling external weather client for date: {} in location: {}", date, location);
         String forecastUrl = UriComponentsBuilder.fromUriString(clientUrl+forecastWeatherPath)
                 .queryParam("key", apiKey)

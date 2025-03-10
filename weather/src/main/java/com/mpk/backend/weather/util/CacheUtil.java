@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.Optional;
 
+/**
+ * Cache Utility Service - to assist with the operations of the Redis cache
+ * */
 @Service
 public class CacheUtil {
 
@@ -35,6 +38,9 @@ public class CacheUtil {
         repository.save(value);
     }
 
+    /*  Method to create the cache key, in this case an ID composed of the location and date of the weather
+    *   TTL of message = 30 minutes
+    *  */
     public String generateCacheKey(String location, Date date) {
         return location+date;
     }

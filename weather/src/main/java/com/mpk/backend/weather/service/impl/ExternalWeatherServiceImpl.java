@@ -40,13 +40,15 @@ public class ExternalWeatherServiceImpl implements ExternalWeatherService {
             throw new IllegalArgumentException();
         }
 
-        /*  Check if forecast exists in cache */
+        /*  Check if forecast exists in cache, if yes return the weather */
        Optional<ClientForecastWeatherResponse> cacheResponse = cacheUtil.pollCache(request);
         if(cacheResponse.isPresent()){
             logger.info("Cache hit for id: {}", cacheResponse.get().getId());
             return ResponseEntity.ok(cacheResponse.get());
         }
-
+        /*  If no cache hit, query external weather client and cache the response.
+            TTL is set on the Model object ClientForecastWeatherResponse
+        */
         ResponseEntity<ClientForecastWeatherResponse> response = weatherClient.getForecastWeather(request.getLocation(), request.getDate());
         if(Objects.nonNull(response) && Objects.nonNull(response.getBody())){
             cacheUtil.saveToCache(response.getBody(), request.getLocation(), request.getDate());

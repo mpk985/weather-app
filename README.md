@@ -15,12 +15,12 @@ A small API proof-of-concept weather application
 - Endpoint: /v1/weather
 - Method: GET
 - No Auth necessary for this demo
-- Request Body
+- Request Body JSON
     - "location" : "string"
         - Can be Postal Code, City/State, Latitude/Longitude comma separated
     - "date" : "Date"
         - Format "yyyy-MM-dd" example "2025-03-30"
-- Response Object
+- Response Object JSON
     - id
     - Location
     - CurrentWeather

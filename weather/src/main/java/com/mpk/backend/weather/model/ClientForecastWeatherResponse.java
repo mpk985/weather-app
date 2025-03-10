@@ -6,7 +6,7 @@ import org.springframework.data.redis.core.RedisHash;
 
 @Data
 @NoArgsConstructor
-@RedisHash(timeToLive = 1800L) /*   Expires after 30 minutes */
+@RedisHash(timeToLive = 1800L) /*   TTL = Expires after 30 minutes */
 public class ClientForecastWeatherResponse {
 
     private String id;
